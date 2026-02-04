@@ -9,32 +9,31 @@ import com.eskaryos.products.Product;
 import com.eskaryos.products.Type;
 import com.eskaryos.storage.Stock;
 
-import java.util.UUID;
 
 public class PDVMain {
 
+    public static Stock stock;
+    public static SellerModule module;
 
     public static void main(String[] args) {
-        Stock stock = new Stock();
-        Product arroz = new Product("Arroz", 1, new Brand("Pilao", Type.FOOD), Type.FOOD,5.0,1);
-        stock.addProduct(arroz);
-        Client client = new Client("Pedro");
-        User user = new User("Pedro", "123", true);
-        SellerModule module = new SellerModule(user, client);
+        stock = new Stock();
+        module = new SellerModule(new User("Pedro", "123", true));
 
-        module.addProduct(1,stock,1);
-        module.addProduct(1,stock,1);
-        module.addProduct(1,stock,1);
 
-        module.addPaymentMethod(PaymentMethod.MONEY);
+        Product p1 = new Product("Apple", "01", new Brand("AI", Type.FOOD),Type.FOOD,5.0,2);
 
-        System.out.println(module.getUser());
-        System.out.println(module.getClient());
-        System.out.println(module.getBallance());
+        stock.createStockProduct(p1);
 
-        for (Product p : module.getProducts()){
-            System.out.println(p.getName());
-        }
+        Client client = new Client("Pedro2");
+
+        module.newModule(client);
+        module.addProduct(p1);
+        module.addProduct(p1);
+        module.addProduct(p1);
+        module.addProduct(p1);
+        module.setPaymentMethod(PaymentMethod.MONEY);
+        module.processModule();
+
     }
 
 }

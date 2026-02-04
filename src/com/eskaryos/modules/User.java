@@ -1,6 +1,5 @@
 package com.eskaryos.modules;
 
-import java.util.UUID;
 
 public class User {
 

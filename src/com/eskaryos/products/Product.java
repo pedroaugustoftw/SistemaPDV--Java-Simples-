@@ -6,17 +6,22 @@ public class Product {
     private String description;
     private Brand brand;
     private Type type;
-    private double value;
+    private double price;
     private int stock;
-    private int id;
+    private String id;
 
-    public Product (String name,int id, Brand brand, Type type, double value, int stock) {
+    public Product (String name,String id, Brand brand, Type type, double value, int stock) {
         this.name = name;
         this.type = type;
-        this.value = value;
+        this.price = value;
         this.stock = stock;
         this.description = "";
         this.id = id;
+    }
+    public Product (String name, String id, double value){
+        this.name = name;
+        this.id = id;
+        this.price = getPrice();
     }
 
     public void addStock(int value) {
@@ -25,10 +30,10 @@ public class Product {
     public void removeStock(int value) {
         setStock(getStock()-value);
     }
-    public Integer getId(){
+    public String getId(){
         return this.id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     public Integer getStock(){
@@ -37,11 +42,11 @@ public class Product {
     public void setStock(Integer stock) {
         this.stock = stock;
     }
-    public Double getValue(){
-        return this.value;
+    public Double getPrice(){
+        return this.price;
     }
-    public void setValue(Double value) {
-        this.value = value;
+    public void setPrice(Double value) {
+        this.price = value;
     }
     public Type getType(){
         return this.type;

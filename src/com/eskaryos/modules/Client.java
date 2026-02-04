@@ -1,33 +1,37 @@
 package com.eskaryos.modules;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import com.eskaryos.products.Product;
+
+import java.time.LocalDate;
+import java.util.*;
 
 public class Client {
 
     private String name;
-    private HashMap<Integer, List<String>> lastShopping;
-
+    private List<Product> lastShopping;
+    private LocalDate lastShoppingDate;
 
     public Client(String name) {
         this.name = name;
-        this.lastShopping = new HashMap<>();
+        this.lastShopping = new ArrayList<>();
     }
-    public List<String> getShopping(Integer id) {
-        if(lastShopping.containsKey(id)){
-            return lastShopping.get(id);
-        }
-        return null;
+    public void setLastShopping(List<Product> lastShopping) {this.lastShopping = lastShopping;}
+    public LocalDate getLastShoppingDate(){
+        return lastShoppingDate;
     }
-    public List<String> getAllShopping() {
-        List<String> list = new ArrayList<>();
-        for(int i =0; i< lastShopping.size(); i++) {
-            List<String> l = lastShopping.get(i);
-            list.addAll(l);
-        }
-        return list;
+    public void setLastShoppingDate(LocalDate lastShoppingDate){this.lastShoppingDate = lastShoppingDate;}
+    public List<Product> getLastShoppingProducts(){
+        return lastShopping;
+    }
+    public void addProduct(Product p, int qnt) {
+        lastShopping.add(p);
+    }
+    public void removeProduct(Product p, int qnt) {
+        lastShopping.remove(p);
+    }
+
+    public List<Product> getLastShopping(){
+        return lastShopping;
     }
     public void setName(String name) {
         this.name = name;
