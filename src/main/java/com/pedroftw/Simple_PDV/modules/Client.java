@@ -1,20 +1,35 @@
-package com.eskaryos.modules;
+package com.pedroftw.Simple_PDV.modules;
 
-import com.eskaryos.products.Product;
+
+import com.pedroftw.Simple_PDV.infrastructure.entity.Product;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.*;
 
+@Entity
+@Table(name = "clients")
 public class Client {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String name;
-    private List<Product> lastShopping;
+
+    @ManyToMany
+    @JoinTable(name = "client_purchases", joinColumns = @JoinColumn(name = "client_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> lastShopping = new ArrayList<>();
+
     private LocalDate lastShoppingDate;
 
-    public Client(String name) {
-        this.name = name;
-        this.lastShopping = new ArrayList<>();
+    public Client(){}
+
+    public String getId() { return id; }
+
+    public void addProduct(Product p) {
+        this.lastShopping.add(p);
+        this.lastShoppingDate = LocalDate.now(); // Atualiza a data automaticamente
     }
+
     public void setLastShopping(List<Product> lastShopping) {this.lastShopping = lastShopping;}
     public LocalDate getLastShoppingDate(){
         return lastShoppingDate;

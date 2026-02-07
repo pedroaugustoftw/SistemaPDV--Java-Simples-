@@ -1,4 +1,4 @@
-package com.eskaryos.products;
+package com.pedroftw.Simple_PDV.modules;
 
 public class Brand {
 
